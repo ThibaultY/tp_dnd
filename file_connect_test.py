@@ -1,5 +1,5 @@
 from roll_dice import *
 
-n = RollDice("3D3").keep_max(2)
+n = RollDice("1D3")
 
 print(n)

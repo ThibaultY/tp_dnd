@@ -26,38 +26,44 @@ class NPC:
     def afficher_statistique(self):
         print(',\n'.join("%s: %s" % item for item in vars(self).items()))
 
+    def attack(self, target):
+        attack = RollDice("1D20").sum()
+        if attack == 20:  # attaque critique
+            print("attaque critique.")
+            target.subir_dommage(RollDice("1D8").sum())
+        elif attack == 1:
+            print("attaque ratée.")
+        else:
+            if attack >= target.classe_armure:
+                target.subir_dommage(RollDice("1D6").sum())
 
-n = NPC("Yohan", "humanoide", "humain", "Constructeur")
+    def subir_dommage(self, dommage):
+        print(f"Votre personnage est passé de {self.point_de_vie}")
+        self.point_de_vie -= dommage
+        print(f"Votre personnage est passé de {self.point_de_vie}")
 
-n.afficher_statistique()
+
+# n = NPC("Yohan", "humanoide", "humain", "Constructeur")
+
+# n.afficher_statistique()
 
 
 class Kobold(NPC):
     def __init__(self, nom, race, espece, profession):
         super().__init__(nom, race, espece, profession)
 
-    def attack(self, cible):
-        attack = 20  # RollDice("1D20")
 
-        if attack == 20:  # attaque critique
-            print("attaque critique.")
-            direct_attack = RollDice("1D8")
-            cible.point_de_vie -= direct_attack
-            print(f"cible à maintenant {cible.point_de_vie}")
-        elif attack == 1:
-            print("attaque ratée.")
-        else:
-            pass
-
-    def subir_dommage(self, dommage):
-        pass
-
-
-o = Kobold("Xavier", "humanoide", "humain", "Constructeur")
-
-
-o.attack(n)
+# o = Kobold("Xavier", "humanoide", "humain", "Constructeur")
+# o.attack(n)
 
 class Hero(NPC):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, nom, race, espece, profession):
+        super().__init__(nom, race, espece, profession)
+
+
+cob = Kobold("Xavier", "humanoide", "humain", "Constructeur")
+he = Hero("Yohan", "something", "espece", "fermier")
+
+print(f"cible à maintenant {cob.point_de_vie}")
+print(f"cible à maintenant {he.point_de_vie}")
+he.attack(cob)
