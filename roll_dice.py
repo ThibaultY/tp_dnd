@@ -9,6 +9,7 @@ class RollDice:
     def __init__(self, text_input):
         """
         This is going to roll dice with the amount of face and dice wanted.
+        For getting basic one dice roll you have to use the sum method.
         :param text_input: How many dice with x faces, xDy
         :return: The sum of all the dices
         """
@@ -23,9 +24,6 @@ class RollDice:
         dice_amount = int(text_input[0])
         face_amount = int(text_input[1])
         self.values = [random.randint(1, face_amount) for i in range(dice_amount)]
-
-        if dice_amount == 1:  # If it's only one dice we want this result.
-            return self.values[0]
 
     def sum(self):
         return sum(self.values)

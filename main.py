@@ -4,17 +4,19 @@ Groupe :470
 Ce programme fait la création de personnages de personnage de jeu de dnd
 """
 from roll_dice import *
+from dataclasses import dataclass
 
 
 class NPC:
-    def __init__(self, nom, race, espece, profession):
+    def __init__(self, nom, race, espece, profession, alignement):
         self.profession = profession
         self.espece = espece
         self.race = race
         self.nom = nom
+        self.alignement = alignement
 
         self.classe_armure = RollDice("1D12").sum()
-        self.point_de_vie = 20  # RollDice("1D20").sum()
+        self.point_de_vie = RollDice("1D20").sum()
 
         self.force = RollDice("4D6").keep_max(3)
         self.agilite = RollDice("4D6").keep_max(3)
@@ -28,42 +30,52 @@ class NPC:
 
     def attack(self, target):
         attack = RollDice("1D20").sum()
-        if attack == 20:  # attaque critique
+        print(f"Le dé 20 donne : {attack}")
+        if attack == 20:
             print("attaque critique.")
             target.subir_dommage(RollDice("1D8").sum())
         elif attack == 1:
-            print("attaque ratée.")
+            print("attaque royalement ratée.")
         else:
+            print("Attaque normale, ", end="")
             if attack >= target.classe_armure:
+                print("réussi.")
                 target.subir_dommage(RollDice("1D6").sum())
+            else:
+                print("ratée.")
 
     def subir_dommage(self, dommage):
-        print(f"Votre personnage est passé de {self.point_de_vie}")
+        print(f"{self.nom} avait {self.point_de_vie} point de vie,")
+        print(f"À reçu {dommage} de dommage")
         self.point_de_vie -= dommage
-        print(f"Votre personnage est passé de {self.point_de_vie}")
+        print(f"{self.nom} personnage à maintenant : {self.point_de_vie}")
 
-
-# n = NPC("Yohan", "humanoide", "humain", "Constructeur")
-
-# n.afficher_statistique()
+    @property
+    def est_en_vie(self):
+        if self.point_de_vie < 0:
+            return False
+        else:
+            return True
 
 
 class Kobold(NPC):
-    def __init__(self, nom, race, espece, profession):
-        super().__init__(nom, race, espece, profession)
+    def __init__(self, nom, race, espece, profession, alignement):
+        super().__init__(nom, race, espece, profession, alignement)
 
-
-# o = Kobold("Xavier", "humanoide", "humain", "Constructeur")
-# o.attack(n)
 
 class Hero(NPC):
-    def __init__(self, nom, race, espece, profession):
-        super().__init__(nom, race, espece, profession)
+    def __init__(self, nom, race, espece, profession, alignement):
+        super().__init__(nom, race, espece, profession, alignement)
 
 
-cob = Kobold("Xavier", "humanoide", "humain", "Constructeur")
-he = Hero("Yohan", "something", "espece", "fermier")
+@dataclass
+class Item:
+    quantite: int
+    nom_item: str
 
-print(f"cible à maintenant {cob.point_de_vie}")
-print(f"cible à maintenant {he.point_de_vie}")
-he.attack(cob)
+class SacADos:
+    def __init__(self, liste_item):
+        self.liste_item = liste_item
+
+
+he = Hero("hero", "humain", "thing", "jojo fan", "LB")
