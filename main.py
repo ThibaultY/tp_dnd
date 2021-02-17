@@ -68,6 +68,7 @@ class Kobold(NPC):
 class Hero(NPC):
     def __init__(self, nom, race, espece, profession, alignement):
         super().__init__(nom, race, espece, profession, alignement)
+        self.sac_a_dos = SacADos()
 
 
 class Alignement(Enum):
@@ -95,7 +96,7 @@ class SacADos:
 
     def voir_contenu(self):
         print("----------------")
-        print("INVENTAIRE")
+        print("INVENTAIRE :")
         print("#N\tItem\tQunatiée")
         for item in range(len(self.liste_item)):
             print(f"{item}\t{self.liste_item[item].nom_item} :\t{self.liste_item[item].quantite}")
