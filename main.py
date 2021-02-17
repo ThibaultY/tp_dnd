@@ -5,6 +5,7 @@ Ce programme fait la création de personnages de personnage de jeu de dnd
 """
 from roll_dice import *
 from dataclasses import dataclass
+from enum import Enum
 
 
 class NPC:
@@ -28,6 +29,7 @@ class NPC:
     def afficher_statistique(self):
         print(',\n'.join("%s: %s" % item for item in vars(self).items()))
 
+    @staticmethod
     def attack(target):
         attack = RollDice("1D20").sum()
         print(f"Le dé 20 donne : {attack}")
@@ -68,6 +70,19 @@ class Hero(NPC):
         super().__init__(nom, race, espece, profession, alignement)
 
 
+class Alignement(Enum):
+    LOYAL_BON = 0
+    NEUTRE_BON = 1
+    CHAOTIQUE_BON = 2
+    LOYAL_NEUTRE = 3
+    NEUTRE_NEUTRE = 4
+    CHAOTIQUE_NEUTRE = 5
+    LOYAL_MAUVAIS = 6
+    NEUTRE_MAUVAIS = 7
+    CHAOTIQUE_MAUVAIS = 8
+    NONE = 9
+
+
 @dataclass
 class Item:
     nom_item: str
@@ -87,10 +102,9 @@ class SacADos:
                 emplacement = i
         return is_item_there, emplacement
 
-    def retirer_item(self, item):
+    def retirer_item(self, nom, quatite):
         """
-        Add items in the backpack.
-        :param item: Item class
+        Remove items in the backpack.
         :return: ?
         """
         sub_item = [item.nom_item, item.quantite]
@@ -113,8 +127,8 @@ class SacADos:
 
         print("Votre sac à dos : ", ', '.join(map(str, self.liste_item)))
 
-    def ajouter_item(self, item):
-        add_item = [item.nom_item, item.quantite]
+    def ajouter_item(self, nom, quantite):
+        add_item = [nom, quantite]
         is_item_there, emplacement = self.is_item_there(add_item[0])
 
         if is_item_there:
@@ -125,7 +139,7 @@ class SacADos:
         else:
             print(f"Il n'y avait pas de {add_item[0]}")
             print("Alors l'item sera ajouté")
-            self.liste_item.append(add_item)
+            self.liste_item.append(Item(nom, quantite))
         print("Votre sac à dos : ", ', '.join(map(str, self.liste_item)))
 
 
@@ -136,20 +150,6 @@ eau14 = Item("eau", 14)
 cobol32 = Item("Cobol Stone", 32)
 random29 = Item("random", 1)
 sac = SacADos()
-list_test = [["you", 2], ["yt", 1], ["youTube", 3], ["yet",  4]]
 
 print(eau2)
-sac.ajouter_item(eau2)
-sac.ajouter_item(eau2)
-sac.ajouter_item(eau2)
-sac.ajouter_item(eau2)
-sac.ajouter_item(eau2)
-sac.ajouter_item(eau1)
-sac.ajouter_item(cobol32)
-sac.ajouter_item(cobol32)
-sac.ajouter_item(cobol32)
-sac.ajouter_item(cobol32)
-sac.retirer_item(cobol32)
-sac.retirer_item(eau24)
-sac.retirer_item(random29)
-sac.retirer_item(eau14)
+sac.ajouter_item("eau", 4)
