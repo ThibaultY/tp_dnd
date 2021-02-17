@@ -146,4 +146,26 @@ class SacADos:
         else:
             print(f"Il n'y a pas de {item.nom_item} dans votre sac")
             print(f"ERREUR")
+
         #  self.voir_contenu()
+
+
+eau2 = Item("eau", 2)
+eau1 = Item("eau", 4)
+eau24 = Item("eau", 24)
+eau14 = Item("eau", 14)
+cobol32 = Item("Cobol Stone", 32)
+random29 = Item("random", 1)
+sac = SacADos()
+
+sac.ajouter_item("eau", 4)
+sac.ajouter_item("eau", 4)
+sac.ajouter_item("eau", 4)
+sac.retirer_item("eau", 4)
+sac.ajouter_item("Cobol Stone", 32)
+sac.ajouter_item("Cobol Stone", 32)
+sac.ajouter_item("DIRT", 64)
+sac.ajouter_item("Cobol Stone", 80)
+sac.ajouter_item("random", 80)
+sac.ajouter_item("random", 80)
+sac.ajouter_item("ran", 80)
