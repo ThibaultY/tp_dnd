@@ -1,7 +1,7 @@
 """
 Créateur : Yohan Thibault
-Groupe :470
-Ce programme fait la création de personnages de personnage de jeu de dnd
+Groupe :407
+Ce programme est un jeu dnd sous usilisant la console python
 """
 from roll_dice import *
 from dataclasses import dataclass
@@ -112,7 +112,7 @@ class SacADos:
 
     def voir_contenu(self):
         """
-        To see the sac
+        To see what is in the sac in a fancy way
         """
         print("----------------")
         haut_du_tableau = "¦  #N  ¦   Item   ¦ Qunatiée ¦"  # Will help with calculation
