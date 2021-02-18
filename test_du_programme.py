@@ -1,3 +1,8 @@
+"""
+Créateur : Yohan Thibault
+Groupe :407
+Ce programme sert a tester le dnd_main
+"""
 from dnd_main import *
 
 he = Hero("nom he", "race he", "espece he", "profession he", Alignement.LOYAL_NEUTRE)
