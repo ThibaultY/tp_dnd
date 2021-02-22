@@ -117,8 +117,8 @@ class SacADos:
         print("----------------")
         haut_du_tableau = "¦  #N  ¦   Item   ¦ Qunatiée ¦"  # Will help with calculation
         print("INVENTAIRE :")
-        print("_" * len(haut_du_tableau))  # The top line of the table
-        print(haut_du_tableau)
+        print('\033[4m' + " " * len(haut_du_tableau))  # The top line of the table
+        print('\033[7m' + haut_du_tableau + '\033[0m')
         for item in range(len(self.liste_item)):
             # the information of the table (it's all one line)
             print("¦ ", item, " " * (3-len(str(item))) + "¦",  # Item placement in the inventory

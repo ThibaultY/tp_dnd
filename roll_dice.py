@@ -8,7 +8,7 @@ Ce prgramme est une commande de roll dice.
 class RollDice:
     def __init__(self, text_input):
         """
-        This is going to roll dice with the amount of face and dice wanted. 
+        This is going to roll dice with the amount of face and dice wanted.
         For getting basic one dice roll you have to use the sum method.
         :param text_input: How many dice with x faces, xDy
         :return: The sum of all the dices
