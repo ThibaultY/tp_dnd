@@ -9,12 +9,12 @@ from enum import Enum
 
 
 class NPC:
-    def __init__(self, nom, race, espece, profession, alignement):
+    def __init__(self, nom, race, espece, profession):
         self.profession = profession
         self.espece = espece
         self.race = race
         self.nom = nom
-        self.alignement = alignement
+        self.alignement = Alignement.NONE
 
         self.classe_armure = RollDice("1D12").sum()
         self.point_de_vie = RollDice("1D20").sum()
@@ -77,13 +77,13 @@ class NPC:
 
 
 class Kobold(NPC):
-    def __init__(self, nom, race, espece, profession, alignement):
-        super().__init__(nom, race, espece, profession, alignement)
+    def __init__(self, nom, race, espece, profession):
+        super().__init__(nom, race, espece, profession)
 
 
 class Hero(NPC):
-    def __init__(self, nom, race, espece, profession, alignement):
-        super().__init__(nom, race, espece, profession, alignement)
+    def __init__(self, nom, race, espece, profession):
+        super().__init__(nom, race, espece, profession)
         self.sac_a_dos = SacADos()
 
 
@@ -117,7 +117,6 @@ class SacADos:
         print("----------------")
         haut_du_tableau = "¦  #N  ¦   Item   ¦ Qunatiée ¦"  # Will help with calculation
         print("INVENTAIRE :")
-        print('\033[4m' + " " * len(haut_du_tableau))  # The top line of the table
         print('\033[7m' + haut_du_tableau + '\033[0m')
         for item in range(len(self.liste_item)):
             # the information of the table (it's all one line)

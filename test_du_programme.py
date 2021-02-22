@@ -5,8 +5,8 @@ Ce programme sert a tester le dnd_main
 """
 from dnd_main import *
 
-he = Hero("nom he", "race he", "espece he", "profession he", Alignement.LOYAL_NEUTRE)
-kob = Kobold("nom kob", "race kob", "espece kob", "profession kob", Alignement.LOYAL_MAUVAIS)
+he = Hero("nom he", "race he", "espece he", "profession he")
+kob = Kobold("nom kob", "race kob", "espece kob", "profession kob")
 
 he.afficher_statistique()
 kob.afficher_statistique()
